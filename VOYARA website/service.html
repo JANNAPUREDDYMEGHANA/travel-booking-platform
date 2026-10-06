@@ -1,0 +1,461 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        VOYARA Services
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================== NAVBAR ==================== -->
+
+    <header class="navbar">
+
+
+        <div
+            class="logo"
+            onclick="goHome()"
+        >
+
+            VOYARA
+
+            <span>
+                travel for Peace Not for satisfaction
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="bookings.html">
+                Bookings
+            </a>
+
+            <a href="wallet.html">
+                Wallet
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </nav>
+
+
+        <button
+            class="login-btn"
+            onclick="openLogin()"
+        >
+            Login
+        </button>
+
+
+    </header>
+
+
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+
+    <section class="section">
+
+
+        <div class="section-heading">
+
+
+            <p id="label">
+                VOYARA
+            </p>
+
+
+            <h2 id="title">
+                Services
+            </h2>
+
+
+            <span>
+                Select an option and continue.
+            </span>
+
+
+        </div>
+
+
+        <div
+            class="destination-grid"
+            id="results"
+        >
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+
+        // Get selected service from URL
+
+        const type =
+            new URLSearchParams(
+                location.search
+            ).get("type") || "Flights";
+
+
+        // Update page heading
+
+        document
+            .getElementById("label")
+            .textContent =
+            type.toUpperCase();
+
+
+        document
+            .getElementById("title")
+            .textContent =
+            type;
+
+
+
+        // ==================== SERVICE DATA ====================
+
+        const d = {
+
+
+            // ---------- FLIGHTS ----------
+
+            Flights: [
+
+                [
+                    "IndiGo",
+                    "Delhi → Goa",
+                    4299
+                ],
+
+                [
+                    "Air India",
+                    "Mumbai → Delhi",
+                    5120
+                ],
+
+                [
+                    "SpiceJet",
+                    "Bengaluru → Hyderabad",
+                    3999
+                ]
+
+            ],
+
+
+
+            // ---------- HOTELS ----------
+
+            Hotels: [
+
+                [
+                    "Taj Exotica Goa",
+                    "5-star beachfront",
+                    12999
+                ],
+
+                [
+                    "Vivanta Bengaluru",
+                    "Luxury city stay",
+                    8499
+                ],
+
+                [
+                    "Leela Palace Delhi",
+                    "Premium palace stay",
+                    15999
+                ]
+
+            ],
+
+
+
+            // ---------- TRAINS ----------
+
+            Trains: [
+
+                [
+                    "Vande Bharat",
+                    "Delhi → Varanasi",
+                    1499
+                ],
+
+                [
+                    "Shatabdi Express",
+                    "Bengaluru → Chennai",
+                    899
+                ],
+
+                [
+                    "Rajdhani Express",
+                    "Delhi → Mumbai",
+                    1999
+                ]
+
+            ],
+
+
+
+            // ---------- BUSES ----------
+
+            Buses: [
+
+                [
+                    "RedBus Premium",
+                    "Bengaluru → Hyderabad",
+                    799
+                ],
+
+                [
+                    "VRL Sleeper",
+                    "Hyderabad → Goa",
+                    999
+                ],
+
+                [
+                    "KSRTC Airavat",
+                    "Bengaluru → Mysuru",
+                    499
+                ]
+
+            ],
+
+
+
+            // ---------- CABS ----------
+
+            Cabs: [
+
+                [
+                    "VOYARA Sedan",
+                    "City ride",
+                    599
+                ],
+
+                [
+                    "VOYARA SUV",
+                    "Airport ride",
+                    999
+                ],
+
+                [
+                    "VOYARA Premium",
+                    "Outstation",
+                    1499
+                ]
+
+            ],
+
+
+
+            // ---------- CAR RENTALS ----------
+
+            Cars: [
+
+                [
+                    "Swift",
+                    "Hatchback • 1 day",
+                    1999
+                ],
+
+                [
+                    "Creta",
+                    "SUV • 1 day",
+                    2999
+                ],
+
+                [
+                    "Innova",
+                    "Family • 1 day",
+                    3999
+                ]
+
+            ],
+
+
+
+            // ---------- HOLIDAY PACKAGES ----------
+
+            Packages: [
+
+                [
+                    "Goa Escape",
+                    "3 Nights • Beach & food",
+                    18999
+                ],
+
+                [
+                    "Dubai Explorer",
+                    "4 Nights • City tour",
+                    39999
+                ],
+
+                [
+                    "Kashmir Paradise",
+                    "5 Nights • Mountains",
+                    29999
+                ]
+
+            ],
+
+
+
+            // ---------- ACTIVITIES ----------
+
+            Activities: [
+
+                [
+                    "Scuba Diving Goa",
+                    "Ocean adventure",
+                    2499
+                ],
+
+                [
+                    "Dubai Desert Safari",
+                    "Desert experience",
+                    3999
+                ],
+
+                [
+                    "Bali Water Sports",
+                    "Adventure day",
+                    2999
+                ]
+
+            ]
+
+        };
+
+
+
+        // ==================== DISPLAY RESULTS ====================
+
+        document
+            .getElementById("results")
+            .innerHTML =
+
+            (
+                d[type] || d.Flights
+            )
+
+            .map(function (x) {
+
+
+                return `
+
+                    <div class="destination-card">
+
+
+                        <div
+                            style="
+                                height: 180px;
+                                background:
+                                    linear-gradient(
+                                        135deg,
+                                        #08a9ef,
+                                        #0878c9
+                                    );
+                                display: grid;
+                                place-items: center;
+                                color: #fff;
+                                font-size: 48px;
+                            "
+                        >
+                            ✈
+                        </div>
+
+
+                        <div class="destination-info">
+
+
+                            <h3>
+                                ${x[0]}
+                            </h3>
+
+
+                            <p>
+                                ${x[1]}
+                            </p>
+
+
+                            <strong>
+
+                                ₹${x[2].toLocaleString()}
+
+                                /
+
+                                $${(x[2] / 95).toFixed(2)}
+
+                            </strong>
+
+
+                            <button
+                                onclick="
+                                    state.pending = {
+                                        type: '${type}',
+                                        name: '${x[0]}',
+                                        price: ${x[2]}
+                                    };
+
+                                    save();
+
+                                    location.href =
+                                        'checkout.html';
+                                "
+                            >
+                                Continue
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+
+            })
+
+            .join("");
+
+
+    </script>
+
+
+</body>
+
+</html>

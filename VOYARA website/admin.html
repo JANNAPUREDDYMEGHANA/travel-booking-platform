@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>VOYARA Admin</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            VOYARA ADMIN
+
+            <span>
+                travel for Peace Not for satisfaction
+            </span>
+        </div>
+
+        <nav>
+            <a href="index.html">
+                View Website
+            </a>
+
+            <a href="bookings.html">
+                Bookings
+            </a>
+        </nav>
+
+    </header>
+
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <p>
+                ADMIN DASHBOARD
+            </p>
+
+            <h2>
+                VOYARA Management
+            </h2>
+
+            <span>
+                Manage the travel platform.
+            </span>
+
+        </div>
+
+
+        <div class="service-grid">
+
+            <div class="service-card">
+
+                <h2>
+                    12,458
+                </h2>
+
+                <p>
+                    Total Users
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <h2 id="bc">
+                    0
+                </h2>
+
+                <p>
+                    Total Bookings
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <h2>
+                    ₹48,25,600
+                </h2>
+
+                <p>
+                    Total Revenue
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <h2>
+                    6,421
+                </h2>
+
+                <p>
+                    Active Bookings
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+        <div class="panel">
+
+            <h3>
+                Quick Actions
+            </h3>
+
+            <br>
+
+
+            <button
+                class="primary-btn"
+                onclick="alert('Offer editor opened in demo mode.')">
+
+                Add Offer
+
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                onclick="alert('Package editor opened in demo mode.')">
+
+                Add Package
+
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                onclick="location.href='bookings.html'">
+
+                View Bookings
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        document.getElementById('bc').textContent =
+            state.bookings.length;
+
+    </script>
+
+</body>
+
+</html>

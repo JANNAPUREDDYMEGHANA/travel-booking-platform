@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        VOYARA Confirmation
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header class="navbar">
+
+        <div
+            class="logo"
+            onclick="goHome()"
+        >
+
+            VOYARA
+
+            <span>
+                travel for Peace Not for satisfaction
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <section
+        class="section"
+        style="text-align: center"
+    >
+
+
+        <div class="panel">
+
+
+            <div
+                style="
+                    font-size: 70px;
+                "
+            >
+                ✓
+            </div>
+
+
+            <p class="small-title">
+                BOOKING CONFIRMED
+            </p>
+
+
+            <h1
+                style="
+                    font-size: 42px;
+                    margin: 12px;
+                "
+            >
+                Your journey is booked!
+            </h1>
+
+
+            <p
+                style="
+                    color: #71899b;
+                "
+            >
+                Booking ID
+            </p>
+
+
+            <h2
+                id="bid"
+                style="
+                    color: #0878c9;
+                    margin: 8px 0 25px;
+                "
+            ></h2>
+
+
+            <button
+                class="primary-btn"
+                onclick="location.href='bookings.html'"
+            >
+                My Bookings
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                onclick="goHome()"
+            >
+                Back Home
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        document.getElementById('bid').textContent =
+            new URLSearchParams(location.search).get('id')
+            || 'VYR-DEMO';
+
+    </script>
+
+
+</body>
+
+</html>

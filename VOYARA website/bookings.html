@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        VOYARA Bookings
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header class="navbar">
+
+        <div
+            class="logo"
+            onclick="goHome()"
+        >
+
+            VOYARA
+
+            <span>
+                travel for Peace Not for satisfaction
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="wallet.html">
+                Wallet
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <section class="section">
+
+
+        <div class="section-heading">
+
+            <p>
+                MY JOURNEYS
+            </p>
+
+            <h2>
+                My Bookings
+            </h2>
+
+            <span>
+                Your confirmed trips.
+            </span>
+
+        </div>
+
+
+        <div
+            id="list"
+            class="panel"
+        >
+
+        </div>
+
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        const l = document.getElementById('list');
+
+
+        if (!state.bookings.length) {
+
+            l.innerHTML = `
+                <h3>
+                    No bookings yet.
+                </h3>
+
+                <br>
+
+                <button
+                    class="primary-btn"
+                    onclick="goHome()"
+                >
+                    Explore Destinations
+                </button>
+            `;
+
+        }
+
+        else {
+
+            l.innerHTML = state.bookings.map(b => `
+
+                <div
+                    style="
+                        padding: 20px 0;
+                        border-bottom: 1px solid #dceff8;
+                    "
+                >
+
+                    <h3>
+                        ${b.name}
+                    </h3>
+
+
+                    <p
+                        style="
+                            color: #71899b;
+                        "
+                    >
+                        ${b.type}
+                        •
+                        ${b.date}
+                        •
+                        ${b.id}
+                    </p>
+
+
+                    <b
+                        style="
+                            color: #0878c9;
+                        "
+                    >
+                        ₹${b.price.toLocaleString()}
+                        /
+                        $${(b.price / 95).toFixed(2)}
+                    </b>
+
+
+                    <span
+                        style="
+                            float: right;
+                            color: #08a9ef;
+                            font-weight: 800;
+                        "
+                    >
+                        ${b.status}
+                    </span>
+
+                </div>
+
+            `).join('');
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

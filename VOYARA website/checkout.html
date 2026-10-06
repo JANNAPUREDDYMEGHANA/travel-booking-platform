@@ -1,0 +1,340 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>
+        VOYARA Checkout
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header class="navbar">
+
+        <div
+            class="logo"
+            onclick="goHome()"
+        >
+
+            VOYARA
+
+            <span>
+                travel for Peace Not for satisfaction
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="bookings.html">
+                My Bookings
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <section class="section">
+
+
+        <div class="section-heading">
+
+            <p>
+                SECURE CHECKOUT
+            </p>
+
+            <h2>
+                Complete your booking
+            </h2>
+
+            <span>
+                Demo payment — no real money charged.
+            </span>
+
+        </div>
+
+
+        <div class="panel">
+
+
+            <h2 id="name"></h2>
+
+
+            <p
+                id="type"
+                style="
+                    color: #71899b;
+                    margin: 8px 0;
+                "
+            ></p>
+
+
+            <h2
+                id="price"
+                style="
+                    color: #0878c9;
+                "
+            ></h2>
+
+
+            <input
+                id="traveller"
+                placeholder="Traveller full name"
+                style="
+                    width: 100%;
+                    padding: 14px;
+                    margin: 20px 0 10px;
+                    border: 1px solid #cfe8f4;
+                    border-radius: 10px;
+                "
+            >
+
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                style="
+                    width: 100%;
+                    padding: 14px;
+                    margin: 10px 0;
+                    border: 1px solid #cfe8f4;
+                    border-radius: 10px;
+                "
+            >
+
+
+            <input
+                id="coupon"
+                placeholder="Coupon: VOYARA500"
+                style="
+                    width: 100%;
+                    padding: 14px;
+                    margin: 10px 0;
+                    border: 1px solid #cfe8f4;
+                    border-radius: 10px;
+                "
+            >
+
+
+            <button
+                class="outline"
+                onclick="coupon()"
+            >
+                Apply Coupon
+            </button>
+
+
+            <p
+                id="msg"
+                style="
+                    color: #08a9ef;
+                    margin: 10px 0;
+                "
+            ></p>
+
+
+            <select
+                style="
+                    width: 100%;
+                    padding: 14px;
+                    border: 1px solid #cfe8f4;
+                    border-radius: 10px;
+                    margin: 12px 0;
+                "
+            >
+
+                <option>
+                    UPI / Wallet
+                </option>
+
+                <option>
+                    Credit / Debit Card
+                </option>
+
+                <option>
+                    PayPal
+                </option>
+
+            </select>
+
+
+            <button
+                class="full-btn"
+                onclick="payNow()"
+            >
+                Pay & Confirm Booking
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+
+        const p = state.pending || {
+            type: 'Destination',
+            name: 'Goa',
+            price: 8999
+        };
+
+
+        let total = p.price;
+
+
+        document.getElementById('name').textContent =
+            p.name;
+
+
+        document.getElementById('type').textContent =
+            p.type;
+
+
+        function display() {
+
+            document.getElementById('price').textContent =
+                '₹' +
+                total.toLocaleString() +
+                ' / $' +
+                (total / 95).toFixed(2);
+
+        }
+
+
+        display();
+
+
+        function coupon() {
+
+            if (
+                document
+                    .getElementById('coupon')
+                    .value
+                    .trim()
+                    .toUpperCase() === 'VOYARA500'
+            ) {
+
+                total = Math.max(
+                    0,
+                    p.price - 500
+                );
+
+
+                document.getElementById('msg').textContent =
+                    '₹500 discount applied!';
+
+            }
+
+            else {
+
+                document.getElementById('msg').textContent =
+                    'Invalid coupon.';
+
+            }
+
+
+            display();
+
+        }
+
+
+        function payNow() {
+
+
+            if (
+                !document
+                    .getElementById('traveller')
+                    .value
+                    .trim()
+                ||
+                !document
+                    .getElementById('email')
+                    .value
+                    .trim()
+            ) {
+
+                return alert(
+                    'Enter traveller name and email.'
+                );
+
+            }
+
+
+            const id =
+                'VYR' +
+                Date.now()
+                    .toString()
+                    .slice(-8);
+
+
+            state.bookings.unshift({
+
+                id,
+
+                type: p.type,
+
+                name: p.name,
+
+                price: total,
+
+                date:
+                    new Date()
+                        .toLocaleDateString(),
+
+                status:
+                    'Confirmed'
+
+            });
+
+
+            state.pearls +=
+                Math.floor(total / 100);
+
+
+            state.pending = null;
+
+
+            save();
+
+
+            location.href =
+                'confirmation.html?id=' + id;
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
